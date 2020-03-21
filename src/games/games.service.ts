@@ -1,15 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import apicalypse, { ApicalypseConfig } from "apicalypse";
+import igdb from "igdb-api-node";
 
-const requestOptions: ApicalypseConfig = {
-  baseURL: 'https://api-v3.igdb.com',
-  headers: {
-    'Accept': 'application/json',
-    'user-key': '3a8ab4d697686cfef5fc40af5d685962',
-  },
-  responseType: 'json',
-  timeout: 15000,
-};
+process.env.IGDB_API_KEY = '3a8ab4d697686cfef5fc40af5d685962';
 
 @Injectable()
 export class GamesService {
@@ -17,9 +9,7 @@ export class GamesService {
     console.log(`searching games by title ${title}`);
 
     try {
-      const response = await apicalypse({
-        ...requestOptions,
-      })
+      const response = await igdb()
         .fields([
           'name',
           'slug',
@@ -40,9 +30,7 @@ export class GamesService {
     const nowSeconds = Math.floor(Date.now() / 1000);
 
     try {
-      const response = await apicalypse({
-        ...requestOptions,
-      })
+      const response = await igdb()
         .fields([
           'name',
           'slug',
@@ -64,9 +52,7 @@ export class GamesService {
 
   async getBySlug(slug: string): Promise<string> {
     console.log(`getting a game by slug "${slug}"`);
-    const response = await apicalypse({
-      ...requestOptions,
-    })
+    const response = await igdb()
       .fields([
         'name',
         'slug'

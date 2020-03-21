@@ -7,7 +7,7 @@ export interface ApicalypseConfig extends AxiosRequestConfig {
 
 export type QueryMethod = "body" | "url";
 
-declare interface Apicalypse {
+export interface Apicalypse {
   request<T = any>(url: string): Promise<AxiosResponse<T>>;
   requestAll<T = any>(url: string, opts?: RequestAllConfig): Promise<T[]>;
 
@@ -17,8 +17,8 @@ declare interface Apicalypse {
   fields(fields: string | string[]): Apicalypse;
   sort(fieldWithDirection: string): Apicalypse;
   sort(field: string, direction: SortDirection): Apicalypse;
-  limit(limit: number | string): Apicalypse;
-  offset(offset: number | string): Apicalypse;
+  limit(limit: number): Apicalypse;
+  offset(offset: number): Apicalypse;
   search(search: string): Apicalypse;
   where(filters: string | string[]): Apicalypse;
 }
