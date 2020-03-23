@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import igdb from 'igdb-api-node';
 
-process.env.IGDB_API_KEY = '3a8ab4d697686cfef5fc40af5d685962';
-
 @Injectable()
 export class GamesService {
   async find(title: string): Promise<string> {
