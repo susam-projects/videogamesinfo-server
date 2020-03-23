@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GamesController } from './games.controller';
 import { GamesService } from './games.service';
-import { HttpException, HttpStatus } from "@nestjs/common";
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 describe('AppController', () => {
   let appController: GamesController;
@@ -24,7 +24,9 @@ describe('AppController', () => {
         exception = e;
       }
       expect(exception).toBeDefined();
-      expect((exception as HttpException).getStatus()).toEqual(HttpStatus.BAD_REQUEST);
+      expect((exception as HttpException).getStatus()).toEqual(
+        HttpStatus.BAD_REQUEST,
+      );
     });
 
     // it('should return empty array if no game is found', () => {

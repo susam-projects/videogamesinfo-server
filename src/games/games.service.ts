@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import igdb from "igdb-api-node";
+import igdb from 'igdb-api-node';
 
 process.env.IGDB_API_KEY = '3a8ab4d697686cfef5fc40af5d685962';
 
@@ -10,18 +10,14 @@ export class GamesService {
 
     try {
       const response = await igdb()
-        .fields([
-          'name',
-          'slug',
-          'release_dates',
-        ])
+        .fields(['name', 'slug', 'release_dates'])
         .search(title)
         .request('/games');
       return response.data;
     } catch (err) {
       console.error(err);
     }
-    return "[]";
+    return '[]';
   }
 
   async getRecent(): Promise<string> {
@@ -39,7 +35,7 @@ export class GamesService {
           'follows',
           'first_release_date',
         ])
-        .sort('first_release_date', "desc")
+        .sort('first_release_date', 'desc')
         .where(`first_release_date < ${nowSeconds}`)
         .limit(5)
         .request('/games');
@@ -47,16 +43,13 @@ export class GamesService {
     } catch (err) {
       console.error(err);
     }
-    return "[]";
+    return '[]';
   }
 
   async getBySlug(slug: string): Promise<string> {
     console.log(`getting a game by slug "${slug}"`);
     const response = await igdb()
-      .fields([
-        'name',
-        'slug'
-      ])
+      .fields(['name', 'slug'])
       .where(`slug = "${slug}"`)
       .request('/games');
     try {
@@ -64,6 +57,6 @@ export class GamesService {
     } catch (err) {
       console.error(err);
     }
-    return "[]";
+    return '[]';
   }
 }
